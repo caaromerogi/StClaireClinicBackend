@@ -24,7 +24,7 @@ public class Patient {
     private String dni;
 
     @Column(name = "number_of_appointments", nullable = false)
-    private int numberOfAppointments = 1;
+    private int numberOfAppointments;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medical_specialty_id", nullable = false)
@@ -33,8 +33,8 @@ public class Patient {
     @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Date> dates;
 
-    public void incrementNumberOfAppointment(){
-        this.numberOfAppointments += 1;
+    public void incrementNumberOfAppointment(int numberOfAppointments){
+        this.numberOfAppointments = numberOfAppointments + 1;
     }
 
     public void addDate(Date date){

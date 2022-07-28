@@ -20,4 +20,8 @@ public class MedicalSpecialtyDTO {
         this.physicianInCharge = physicianInCharge;
         this.patients = patients;
     }
+
+    public void addPatientDTO(PatientDTO patientDTO){
+        patients.add(patientDTO);
+    }
 }

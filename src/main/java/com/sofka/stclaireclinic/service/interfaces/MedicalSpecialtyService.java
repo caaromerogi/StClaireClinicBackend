@@ -1,17 +1,18 @@
 package com.sofka.stclaireclinic.service.interfaces;
 
-import com.sofka.stclaireclinic.entity.MedicalSpecialty;
+import com.sofka.stclaireclinic.dto.MedicalSpecialtyDTO;
+import com.sofka.stclaireclinic.dto.PatientDTO;
 
 import java.util.List;
 
 public interface MedicalSpecialtyService {
-    List<MedicalSpecialty> getAllMedicalSpecialties();
+    List<MedicalSpecialtyDTO> getAllMedicalSpecialties();
 
-    MedicalSpecialty getMedicalSpecialtyById(Long id);
+    MedicalSpecialtyDTO getMedicalSpecialtyById(Long id);
 
-    MedicalSpecialty createMedicalSpecialty(MedicalSpecialty medicalSpecialty);
+    MedicalSpecialtyDTO createMedicalSpecialty(MedicalSpecialtyDTO medicalSpecialtyDTO);
 
-    MedicalSpecialty updateMedicalSpecialty(Long id, MedicalSpecialty medicalSpecialty);
+    MedicalSpecialtyDTO updateMedicalSpecialty(Long id, PatientDTO patientDTO);
 
     void deleteMedicalSpecialty(Long id);
 

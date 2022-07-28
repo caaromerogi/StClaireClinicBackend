@@ -1,13 +1,13 @@
 package com.sofka.stclaireclinic.service.interfaces;
 
-import com.sofka.stclaireclinic.entity.Patient;
+import com.sofka.stclaireclinic.dto.PatientDTO;
+
 
 import java.util.List;
 
 public interface PatientService {
-    List<Patient> getAllPatients();
+    List<PatientDTO> getAllPatients();
 
-    Patient updatePatientAppointments();
 
     void deletePatient(Long id);
 
