@@ -8,9 +8,9 @@ import java.util.List;
 public interface PatientService {
     List<PatientDTO> getAllPatients();
 
+    PatientDTO getPatientById(Long id);
 
     void deletePatient(Long id);
 
-    void deleteAllPatients();
 
 }

@@ -15,15 +15,11 @@ public class PatientDTO {
     private String name;
     private String dni;
     private String age;
+    private String date;
     private List<DateDTO> dates = new ArrayList<>();
 
     private int numberOfAppointments;
 
-    public PatientDTO(String name, String dni, String age, List<DateDTO> dates) {
-        this.name = name;
-        this.dni = dni;
-        this.age = age;
-        this.dates = dates;
-    }
+
 
 }

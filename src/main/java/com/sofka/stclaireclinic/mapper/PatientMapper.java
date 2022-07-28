@@ -42,8 +42,9 @@ public class PatientMapper {
 
     public List<Patient> convertToPatientEntityList(List<PatientDTO> patientsDTO){
         List<Patient> patients = new ArrayList<>();
-        patientsDTO.forEach(patientDTO -> patients.add(convertToEntity(patientDTO)));
-
+        if(!patientsDTO.isEmpty()){
+            patientsDTO.forEach(patientDTO -> patients.add(convertToEntity(patientDTO)));
+        }
         return patients;
     }
 }

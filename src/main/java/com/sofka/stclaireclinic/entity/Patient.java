@@ -3,6 +3,7 @@ package com.sofka.stclaireclinic.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,7 +32,7 @@ public class Patient {
     private MedicalSpecialty medicalSpecialty;
 
     @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Date> dates;
+    private List<Date> dates = new ArrayList<>();
 
     public void incrementNumberOfAppointment(){
         this.numberOfAppointments += 1;
