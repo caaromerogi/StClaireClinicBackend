@@ -30,7 +30,7 @@ public class Patient {
     @JoinColumn(name = "medical_specialty_id", nullable = false)
     private MedicalSpecialty medicalSpecialty;
 
-    @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Date> dates;
 
     public void incrementNumberOfAppointment(){
