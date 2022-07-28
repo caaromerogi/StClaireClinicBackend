@@ -63,12 +63,13 @@ public class MedicalSpecialtyServiceImpl implements MedicalSpecialtyService {
         for (Patient p: medicalSpecialty.getPatients()) {
             if(p.getDni().equalsIgnoreCase(patientDTO.getDni())){
                 patient.setId(p.getId());
-                patient.incrementNumberOfAppointment(p.getNumberOfAppointments());
+                patient.setNumberOfAppointments(p.getNumberOfAppointments());
+                patient.incrementNumberOfAppointment();
                 patient.setMedicalSpecialty(medicalSpecialty);
                 patientRepository.save(patient);
 
 
-                medicalSpecialty.getPatients().remove(patientDTO.getId());
+                medicalSpecialty.getPatients().remove(p);
                 medicalSpecialty.addPatient(patient);
                 medicalSpecialtyRepository.save(medicalSpecialty);
 
@@ -76,7 +77,6 @@ public class MedicalSpecialtyServiceImpl implements MedicalSpecialtyService {
             }
         }
 
-        //Si no lo encuentra lo guarda
         patient.setMedicalSpecialty(medicalSpecialty);
         medicalSpecialty.addPatient(patient);
         medicalSpecialtyRepository.save(medicalSpecialty);

@@ -15,6 +15,7 @@ public class PatientMapper {
         patientDTO.setName(patient.getName());
         patientDTO.setDni(patient.getDni());
         patientDTO.setAge(patient.getAge());
+        patientDTO.setNumberOfAppointments(patient.getNumberOfAppointments());
         patientDTO.setDates(dateMapper.convertToDateDTOList(patient.getDates()));
 
         return patientDTO;
@@ -26,6 +27,7 @@ public class PatientMapper {
         patient.setName(patientDTO.getName());
         patient.setDni(patientDTO.getDni());
         patient.setAge(patientDTO.getAge());
+        patient.setNumberOfAppointments(patientDTO.getNumberOfAppointments());
         patient.setDates(dateMapper.convertToDateEntityList(patientDTO.getDates()));
 
         return patient;
