@@ -21,6 +21,7 @@ public class MedicalSpecialtyMapper {
     }
 
     public MedicalSpecialty convertToEntity(MedicalSpecialtyDTO medicalSpecialtyDTO){
+
         MedicalSpecialty medicalSpecialty = new MedicalSpecialty();
         medicalSpecialty.setId(medicalSpecialtyDTO.getId());
         medicalSpecialty.setName(medicalSpecialtyDTO.getName());

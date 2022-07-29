@@ -12,11 +12,11 @@ public interface MedicalSpecialtyService {
 
     MedicalSpecialtyDTO createMedicalSpecialty(MedicalSpecialtyDTO medicalSpecialtyDTO);
 
-    MedicalSpecialtyDTO updateOrCreatePatient(Long id, PatientDTO patientDTO);
+    MedicalSpecialtyDTO createPatientInMedicalSpecialty(Long id, PatientDTO patientDTO);
 
     MedicalSpecialtyDTO updateMedicalSpecialty(Long id, MedicalSpecialtyDTO medicalSpecialtyDTO);
 
-    void deleteAllPatients(Long id);
+    void deleteAllPatientsInSpecialty(Long id);
 
     void deleteMedicalSpecialty(Long id);
 

@@ -3,6 +3,8 @@ package com.sofka.stclaireclinic.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +24,10 @@ public class Patient {
     private String age;
 
     @Column(name = "dni", nullable = false)
-    private String dni;
+    private Long dni;
 
     @Column(name = "number_of_appointments", nullable = false)
-    private int numberOfAppointments = 1;
+    private Long numberOfAppointments;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medical_specialty_id", nullable = false)
@@ -35,7 +37,11 @@ public class Patient {
     private List<Date> dates = new ArrayList<>();
 
     public void incrementNumberOfAppointment(){
-        this.numberOfAppointments += 1;
+        if(this.numberOfAppointments ==null){
+            setNumberOfAppointments(1L);
+        }else {
+            this.numberOfAppointments += 1L;
+        }
     }
 
     public void addDate(Date date){

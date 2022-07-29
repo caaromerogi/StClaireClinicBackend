@@ -3,6 +3,7 @@ package com.sofka.stclaireclinic.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +30,4 @@ public class MedicalSpecialty {
         return this;
     }
 
-    public MedicalSpecialty removePatient(Patient patient) {
-        patients.remove(patient);
-        return this;
-    }
 }

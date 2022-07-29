@@ -3,7 +3,7 @@ package com.sofka.stclaireclinic.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,15 +12,15 @@ import java.util.List;
 @AllArgsConstructor
 public class MedicalSpecialtyDTO {
     private Long id;
-    private String name;
-    private String physicianInCharge;
-    private List<PatientDTO> patients = new ArrayList<>();
 
-    public MedicalSpecialtyDTO(String name, String physicianInCharge, List<PatientDTO> patients) {
-        this.name = name;
-        this.physicianInCharge = physicianInCharge;
-        this.patients = patients;
-    }
+
+    @Size(min = 5, max = 100, message = "The number of characters are not in the acceptable range (5 to 100 char)")
+    private String name;
+
+    @Size(min = 10, max = 45, message = "The number of characters are not in the acceptable range (10 o 45 char)")
+    private String physicianInCharge;
+
+    private List<PatientDTO> patients = new ArrayList<>();
 
     public void addPatientDTO(PatientDTO patientDTO){
         patients.add(patientDTO);

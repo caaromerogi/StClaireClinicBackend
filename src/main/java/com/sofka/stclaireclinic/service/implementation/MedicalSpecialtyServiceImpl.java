@@ -32,7 +32,6 @@ public class MedicalSpecialtyServiceImpl implements MedicalSpecialtyService {
 
     MedicalSpecialtyMapper medicalSpecialtyMapper = new MedicalSpecialtyMapper();
     PatientMapper patientMapper = new PatientMapper();
-
     DateMapper dateMapper = new DateMapper();
 
     @Override
@@ -45,7 +44,7 @@ public class MedicalSpecialtyServiceImpl implements MedicalSpecialtyService {
 
     @Override
     public MedicalSpecialtyDTO getMedicalSpecialtyById(Long id) {
-
+        //Optional Object
         Optional<MedicalSpecialty> oMedicalSpecialty = medicalSpecialtyRepository.findById(id);
         if (oMedicalSpecialty.isPresent()) {
             MedicalSpecialty medicalSpecialty = oMedicalSpecialty.get();
@@ -65,36 +64,14 @@ public class MedicalSpecialtyServiceImpl implements MedicalSpecialtyService {
     }
 
     @Override
-    public MedicalSpecialtyDTO updateOrCreatePatient(Long idMedicalSpecialty, PatientDTO patientDTO) {
+    public MedicalSpecialtyDTO createPatientInMedicalSpecialty(Long idMedicalSpecialty, PatientDTO patientDTO) {
+        //Converting DTO to entity
         MedicalSpecialtyDTO medicalSpecialtyDTO = getMedicalSpecialtyById(idMedicalSpecialty);
         MedicalSpecialty medicalSpecialty = medicalSpecialtyMapper.convertToEntity(medicalSpecialtyDTO);
         Patient patient = patientMapper.convertToEntity(patientDTO);
         DateDTO dateDTO = new DateDTO(patientDTO.getDate());
         Date date = dateMapper.convertToEntity(dateDTO);
 
-        for (Patient p: medicalSpecialty.getPatients()) {
-            if(p.getDni().equalsIgnoreCase(patientDTO.getDni())){
-
-                //Saving patient
-                patient.setId(p.getId());
-                patient.setNumberOfAppointments(p.getNumberOfAppointments());
-                patient.incrementNumberOfAppointment();
-                patient.setMedicalSpecialty(medicalSpecialty);
-                date.setPatient(patient);
-                patient.addDate(date);
-                patientRepository.save(patient);
-
-
-
-                //Saving the medical specialty
-                medicalSpecialty.getPatients().remove(p);
-                medicalSpecialty.addPatient(patient);
-                //Overwrite old medical specialty for new with new patient added
-                medicalSpecialty = medicalSpecialtyRepository.save(medicalSpecialty);
-
-                return medicalSpecialtyMapper.convertToDTO(medicalSpecialty);
-            }
-        }
         date.setPatient(patient);
         patient.addDate(date);
         patient.setMedicalSpecialty(medicalSpecialty);
@@ -122,7 +99,7 @@ public class MedicalSpecialtyServiceImpl implements MedicalSpecialtyService {
     }
 
     @Override
-    public void deleteAllPatients(Long id) {
+    public void deleteAllPatientsInSpecialty(Long id) {
         MedicalSpecialty medicalSpecialty = medicalSpecialtyMapper.convertToEntity(getMedicalSpecialtyById(id));
         patientRepository.deleteAll(medicalSpecialty.getPatients());
     }
