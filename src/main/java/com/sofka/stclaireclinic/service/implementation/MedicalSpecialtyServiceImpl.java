@@ -16,8 +16,10 @@ import com.sofka.stclaireclinic.service.interfaces.MedicalSpecialtyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class MedicalSpecialtyServiceImpl implements MedicalSpecialtyService {
@@ -71,15 +73,27 @@ public class MedicalSpecialtyServiceImpl implements MedicalSpecialtyService {
         Patient patient = patientMapper.convertToEntity(patientDTO);
         DateDTO dateDTO = new DateDTO(patientDTO.getDate());
         Date date = dateMapper.convertToEntity(dateDTO);
+        Boolean state = false;
+        ArrayList<Patient> patientsProve= (ArrayList<Patient>) medicalSpecialty.getPatients();
+        for (Patient p:patientsProve) {
+            if (p.getDni()==patientDTO.getId()) {
+                state=true;
+            }
+        }
+        if(state==true){
+            return null;
+        }else {
+            date.setPatient(patient);
+            patient.addDate(date);
+            patient.setMedicalSpecialty(medicalSpecialty);
+            patient.incrementNumberOfAppointment();
+            medicalSpecialty.addPatient(patient);
+            medicalSpecialtyRepository.save(medicalSpecialty);
+            patientRepository.save(patient);
+            return medicalSpecialtyMapper.convertToDTO(medicalSpecialty);
+        }
 
-        date.setPatient(patient);
-        patient.addDate(date);
-        patient.setMedicalSpecialty(medicalSpecialty);
-        patient.incrementNumberOfAppointment();
-        medicalSpecialty.addPatient(patient);
-        medicalSpecialtyRepository.save(medicalSpecialty);
-        patientRepository.save(patient);
-        return medicalSpecialtyMapper.convertToDTO(medicalSpecialty);
+
     }
 
     @Override
