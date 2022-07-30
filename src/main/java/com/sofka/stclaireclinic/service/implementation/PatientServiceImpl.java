@@ -40,7 +40,6 @@ public class PatientServiceImpl implements PatientService {
         Patient patient = patientRepository.findById(id).orElse(null);
         DateDTO dateDTO = new DateDTO(patientDTO.getDate());
         Date date = dateMapper.convertToEntity(dateDTO);
-
         date.setPatient(patient);
         assert patient != null;
         patient.addDate(date);

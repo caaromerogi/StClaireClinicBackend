@@ -25,6 +25,7 @@ public class PatientController {
             result.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
             return null;
         }
+
         return patientService.updatePatient(id, patientDTO);
     }
 
